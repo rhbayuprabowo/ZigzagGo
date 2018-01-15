@@ -8,7 +8,7 @@ public class BallController : MonoBehaviour {
 
 	Rigidbody rb;
 	bool Started;
-    bool GameOver;
+	bool GameOver;
 
 	void Awake(){
 		rb = GetComponent<Rigidbody> ();
@@ -16,36 +16,36 @@ public class BallController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Started = false;
-        GameOver = false;
-    }
+		Started = false;
+		GameOver = false;
+	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!Started) {
-			if (LeftClick()) {
-				StartBall ();
+			if (leftClick()) {
+				startBall ();
 				Started = true;
 			}
 		}
 
-        if (!Physics.Raycast(transform.position, Vector3.down, 1f))
-        {
-            GameOver = true;
-            rb.velocity = new Vector3(0, -25f, 0);
-        }
+		if (!Physics.Raycast (transform.position, Vector3.down, 1f)) {
+			GameOver = true;
+			rb.velocity =new Vector3(0, -25f, 0);
+			Camera.main.GetComponent<CameraFollow> ().gameOver = true;
+		}
 
-		if (LeftClick() && !GameOver) {
-			SwitchDirection ();
+		if (leftClick() && !GameOver) {
+			switchDirection ();
 		}
 	}
 
 	//All custom funtion here
-	void StartBall() {
+	void startBall() {
 		rb.velocity = new Vector3 (speed, 0, 0);
 	}
 
-	void SwitchDirection(){
+	void switchDirection(){
 		if (rb.velocity.z > 0) {
 			rb.velocity = new Vector3 (speed, 0, 0);
 		} else if (rb.velocity.x > 0) {
@@ -53,7 +53,7 @@ public class BallController : MonoBehaviour {
 		}
 	}
 
-	bool LeftClick(){
+	bool leftClick(){
 		if (Input.GetMouseButtonDown (0)) {
 			return true;
 		} else {
