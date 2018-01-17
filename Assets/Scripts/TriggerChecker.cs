@@ -16,7 +16,7 @@ public class TriggerChecker : MonoBehaviour {
 
 	void OnTriggerExit(Collider col) {
 		if (col.gameObject.tag == "Ball") {
-			Invoke ("FallDown", 0.5f);
+			Invoke ("FallDown", 0.3f);
 		}
 	}
 
